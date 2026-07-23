@@ -8,6 +8,16 @@ MPU6050
 
 Wire.h
 
+**PINOUT**
+
+VCC to 3.3v
+
+GND to GND
+
+SDA to GPIO 8
+
+SCL to GPIO 9
+
 PS
 
 *Don't move the sensore while it calibrating, it calculate the average gyrodrift so it can be used to get the actual angle.
