@@ -35,7 +35,10 @@ But how do the master identified each slaves with only 2 wires? Each of the slav
 
 More About Sensor Fusion and Complementary Filter
 -----------------------------------------------------------
-Sensor fusion is combining data from different sensors to get more accurate and reliable information. In many cases the data will have noise and produce an uncertain data, therefore a filter is used. Complementary filter
+Sensor fusion is combining data from different sensors to get more accurate and reliable information. In many cases the data will have noise and produce an uncertain data, therefore a filter is used. 
+Complementary filter formula
+<img width="362" height="51" alt="image" src="https://github.com/user-attachments/assets/d3152698-3ab5-4a00-94b2-deef29d4db73" />
+where K usually set as 0.98. Because K is a konstant and the program can't filter out noises in extreme condition.
 
 
 
