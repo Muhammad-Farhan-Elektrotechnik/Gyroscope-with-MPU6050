@@ -1,25 +1,31 @@
-**HARDWARE**
+# Introductiion
+There are different type of IMU, in this case MPU6050 will be used. Inside MPU6050 there are built in sensors like accelerometer and gyrometer. These 2 sensors can work together and act like a gyrometer with help of sensor fusion. In this case complementary filter will be more specified, but of course there are more type of filters, like kalmann filter. In this repository will also be focused to the communication protocol used namely I2C.
 
-ESP32-S3
 
-MPU6050
+## Hardware
+* ESP32-S3
+* MPU6050
+* Resistor
+* Jumper Wire
+  
+### PINOUT
+ESP32-S3 | MPU6050
+-------- | -------
+3.3v     | VCC
+GND      | GND
+SDA (I2C)     | GPIO 8
+SCL (I2C)     | GPIO 9
 
-**LIBARY**
+More About I2C
+------------------------------------
+I2C (stands for Inter-Integrated Circuit) is a communication protocol with only 2 wires SDA (Serial Data), SCL (Serial Clock) but unlike other communication protocol like UART, I2C could have more masters and multiple slaves.
 
-Wire.h
+>{!IMPORTANT}
+>Because I2C chips use open-drain outputs, they can only pull the lines down to ground. Without pull-up resistors connected to Vcc, the SDA and SCL lines would float indefinitely after being pulled low, meaning the bus would never return to a logic HIGH state and communication would not be able to start.
+<img width="616" height="292" alt="image" src="https://github.com/user-attachments/assets/7af87b79-08a3-47ff-a2c1-ca58d3faed79" />
 
-**PINOUT**
+But how do the master identified each slaves with only 2 wires? Each of the slaves have their own unique address, these addresses will be used to identify them after the master sends a start condition. Think its like a teacher called one of the students to go upfront and talk to them. When the slaves already identified, the master could write or read data from them but after that, the master have to sends a stop condition in order other master to communicate with that slave.
 
-VCC to 3.3v
 
-GND to GND
-
-SDA to GPIO 8
-
-SCL to GPIO 9
-
-PS
-
-*Don't move the sensor while it calibrating, it calculate the average gyro drift so it can be used to get the actual angle.
-
-*Here the gyroscope using a complementary filter for sensor fusion, feel free to change it to kalman filter using libary to get more stable gyroscpe.
+>[!IMPORTANT]
+>Don't move the sensor while it calibrating, it calculate the average gyro drift so it can be used to get the actual angle.
