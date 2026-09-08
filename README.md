@@ -13,8 +13,8 @@ ESP32-S3 | MPU6050
 -------- | -------
 3.3v     | VCC
 GND      | GND
-SDA (I2C)     | GPIO 8
-SCL (I2C)     | GPIO 9
+GPIO 8     | SDA (I2C) 
+GPIO 9    | SCL (I2C) 
 
 More About I2C
 ------------------------------------
