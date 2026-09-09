@@ -8,7 +8,7 @@ There are different type of IMU, in this case MPU6050 will be used. Inside MPU60
 * Jumper Wire
   
 ### PINOUT
-ESP32-S3 | MPU6050
+Arduino uno R3 | MPU6050
 -------- | -------
 3.3v     | VCC
 GND      | GND
