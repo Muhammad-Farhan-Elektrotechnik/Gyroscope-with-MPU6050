@@ -3,9 +3,8 @@ There are different type of IMU, in this case MPU6050 will be used. Inside MPU60
 
 
 ## Hardware
-* ESP32-S3
+* Arduino uno R3
 * MPU6050
-* Resistor
 * Jumper Wire
   
 ### PINOUT
@@ -13,8 +12,8 @@ ESP32-S3 | MPU6050
 -------- | -------
 3.3v     | VCC
 GND      | GND
-GPIO 8     | SDA (I2C) 
-GPIO 9    | SCL (I2C) 
+A4    | SDA (I2C) 
+A5   | SCL (I2C) 
 
 More About I2C
 ------------------------------------
@@ -30,8 +29,40 @@ I2C (stands for Inter-Integrated Circuit) is a communication protocol with only 
 
 <img width="168" height="82" alt="image" src="https://github.com/user-attachments/assets/51e5cd15-a83e-4da6-9bf0-1557f60bf57b" />
 
-
 But how do the master identified each slaves with only 2 wires? Each of the slaves have their own unique address, these addresses will be used to identify them after the master sends a start condition. Think its like a teacher called one of the students to go upfront and talk to them. When the slaves already identified, the master could write or read data from them but after that, the master have to sends a stop condition in order other master to communicate with that slave. Because of that I2C is not fast as SPI.
+
+Here are the image of how does SDA and SCL signal looks like.
+
+<img width="1246" height="383" alt="image" src="https://github.com/user-attachments/assets/fa5a256f-8fc3-4c22-a41d-1ff6289e46c4" />
+both SDA and SCL starts or idling at HIGH (1).
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+1. It will entering start condition when SDA pulled down to LOW (0) and SCL still at HIGH (1).
+<img width="195" height="329" alt="image" src="https://github.com/user-attachments/assets/6260cd8e-3295-4ce0-a32f-a9329bac4c9f" />
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+2. After entering start conditon, it'll be required 7 bits long unique address.
+<img width="337" height="382" alt="image" src="https://github.com/user-attachments/assets/ea1b6cd0-e7c5-49a0-9da0-3384034c6c65" />
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+3. Then the master decide if it want to write or read, with LOW (0) for write and HIGH (1) for read.
+      <img width="337" height="382" alt="image" src="https://github.com/user-attachments/assets/46866a73-fb21-41df-8dde-bd06a4bbdbf0" />
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+4. Everytime slave addressed and data bytes sended will be followed by ACK/NACK bit (ackknowledge/not ackknowledge) LOW (0) for ACK and HIGH (1) for NACK. ACK means that the bus is used by the slave or the data recieved, otherwise NACK will recall I2C back to HIGH (1).
+      <img width="49" height="332" alt="image" src="https://github.com/user-attachments/assets/044a725e-bb15-4ced-abe8-a3fc4192332c" />
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+5. Here is data byte (followed by ACK bit), where the data will be send or recieved according to read or write.
+      <img width="434" height="368" alt="image" src="https://github.com/user-attachments/assets/41f08d5b-2008-41c5-8f5f-f73c71c39b4a" />
+>[!NOTE]
+>data byte is not specifically to write or read data, but it can also addresses another slave and read or write it in the next data byte.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+6. SDA only changes when SCL at LOW (0)
+      <img width="985" height="278" alt="image" src="https://github.com/user-attachments/assets/e77c1b33-d9d9-4a8e-b556-4ceb955ca3f5" />
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+7. Otherwise it'll be at a stop condition
+<img width="109" height="285" alt="image" src="https://github.com/user-attachments/assets/0f63b26c-69d5-47eb-8406-c228b7a9df82" />
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 More About Sensor Fusion and Complementary Filter
 -----------------------------------------------------------
@@ -46,3 +77,8 @@ where K usually set as 0.98. Because K is a konstant and the program can't filte
 
 >[!IMPORTANT]
 >Don't move the sensor while it calibrating, it calculate the average gyro drift so it can be used to get the actual angle.
+
+DOCUMENTATION
+---------------
+<img width="354" height="335" alt="image" src="https://github.com/user-attachments/assets/56f1e0f3-5883-4f1d-a1f9-7db7c67e45a6" />
+
