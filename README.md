@@ -62,6 +62,9 @@ both SDA and SCL starts or idling at HIGH (1).
 7. Otherwise it'll be at a stop condition
 <img width="109" height="285" alt="image" src="https://github.com/user-attachments/assets/0f63b26c-69d5-47eb-8406-c228b7a9df82" />
 
+>[!TIP]
+>Highly reccomend to check out the video that explained it [here](https://youtu.be/CAvawEcxoPU?si=tvXQgaJvQCcI6Zlu)
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 More About Sensor Fusion and Complementary Filter
